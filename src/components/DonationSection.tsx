@@ -13,12 +13,25 @@ export function DonationSection() {
   const [copied, setCopied] = useState(false);
 
   const copyPix = async () => {
+    let copiedSuccessfully = false;
+
     try {
       await navigator.clipboard.writeText(PIX_COPY_PASTE);
+      copiedSuccessfully = true;
+    } catch {
+      const field = document.createElement("textarea");
+      field.value = PIX_COPY_PASTE;
+      field.style.position = "fixed";
+      field.style.opacity = "0";
+      document.body.appendChild(field);
+      field.select();
+      copiedSuccessfully = document.execCommand("copy");
+      document.body.removeChild(field);
+    }
+
+    if (copiedSuccessfully) {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2500);
-    } catch {
-      setCopied(false);
     }
   };
 
