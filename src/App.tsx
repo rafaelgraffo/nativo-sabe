@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import "./App.css";
 
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
 const categories = [
   { name: "Praias e atrações", icon: Waves },
   { name: "Onde comer", icon: Utensils },
@@ -67,7 +69,7 @@ function App() {
         <a className="brand" href="#">
           <img
             className="header-logo"
-            src="/imagens/logo-principal.png"
+            src={asset("imagens/logo-principal.png")}
             alt="Nativo Sabe - O nativo conhece o caminho"
           />
         </a>
@@ -108,7 +110,7 @@ function App() {
         <div className="banner-container" style={{ width: "100%", padding: "1rem 2rem", textAlign: "center" }}>
           <img
             className="hero-horizontal-logo"
-            src="/imagens/logo-horizontal.png"
+            src={asset("imagens/logo-horizontal.png")}
             alt="Nativo Sabe Banner"
             style={{ maxWidth: "100%", height: "auto", display: "block", margin: "0 auto" }}
           />
@@ -161,7 +163,7 @@ function App() {
           <div className="hero-decoration">
             <img
               className="hero-photo"
-              src="/imagens/praia-barra-grande.jpg"
+              src={asset("imagens/praia-barra-grande.jpg")}
               alt="Vista da Praia de Barra Grande, em Cajueiro da Praia"
             />
           </div>
