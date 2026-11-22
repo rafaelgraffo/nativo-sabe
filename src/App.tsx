@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import {
   ArrowRight,
-  Camera,
   MapPin,
+  PiggyBank,
   Menu,
   MessageCircle,
   Search,
@@ -385,17 +385,18 @@ function App() {
           </span>
 
           <span>
-            <strong>nativo sabe</strong>
-            <small>Cajueiro da Praia – PI</small>
+            <strong>Nativo Sabe</strong>
+            <small>Cajueiro da Praia - PI</small>
           </span>
         </a>
 
         <p>
-          Guia local gratuito, feito para valorizar a região.
+          Todos os direitos reservados à Rafael e Túlio, nativos que uniram
+          forças para criar o projeto.
         </p>
 
         <a className="footer-support" href="#apoiar">
-          <Camera size={17} /> Fazer uma doação
+          <PiggyBank size={18} /> Fazer uma doação
         </a>
       </footer>
     </div>
