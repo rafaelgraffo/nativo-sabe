@@ -69,7 +69,7 @@ function App() {
         <a className="brand" href="#">
           <img
             className="header-logo"
-            src={asset("imagens/logo-principal.png")}
+            src={asset("imagens/logo-principal.jpg")}
             alt="Nativo Sabe - O nativo conhece o caminho"
           />
         </a>
@@ -110,7 +110,7 @@ function App() {
         <div className="banner-container" style={{ width: "100%", padding: "1rem 2rem", textAlign: "center" }}>
           <img
             className="hero-horizontal-logo"
-            src={asset("imagens/logo-horizontal.png")}
+            src={asset("imagens/logo-horizontal.jpg")}
             alt="Nativo Sabe Banner"
             style={{ maxWidth: "100%", height: "auto", display: "block", margin: "0 auto" }}
           />
