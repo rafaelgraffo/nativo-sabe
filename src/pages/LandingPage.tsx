@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Search } from "lucide-react";
 import { DonationSection } from "../components/DonationSection";
-import { PlaceCard } from "../components/PlaceCard";
 import { categories, places } from "../data/places";
 import { asset } from "../utils/asset";
 
+const exploreCategoryIds = ["pontos-turisticos", "guias", "servicos"];
+
 export function LandingPage() {
-  const sortedPlaces = [...places].sort(
-    (a, b) => Number(Boolean(a.isExample)) - Number(Boolean(b.isExample)),
+  const exploreCategories = categories.filter((category) =>
+    exploreCategoryIds.includes(category.id),
   );
 
   return (
@@ -105,22 +106,50 @@ export function LandingPage() {
         <div className="section-heading">
           <div>
             <span className="eyebrow">EXPLORAR</span>
-            <h2>Lugares para conhecer</h2>
+            <h2>O que vale conhecer por aqui</h2>
           </div>
 
           <p>
-            Clique em um lugar para ver detalhes, localização e contato.
+            Escolha uma das áreas abaixo para descobrir os lugares e quem faz
+            Cajueiro da Praia acontecer.
           </p>
         </div>
 
-        <div className="places-grid">
-          {sortedPlaces.map((place) => (
-            <PlaceCard key={place.id} place={place} />
-          ))}
+        <div className="category-grid">
+          {exploreCategories.map((category) => {
+            const Icon = category.icon;
+            const count = places.filter(
+              (place) => place.category === category.id,
+            ).length;
+
+            return (
+              <Link
+                className="category-card"
+                key={category.id}
+                to={`/categoria/${category.id}`}
+              >
+                <span className="category-icon">
+                  <Icon size={25} />
+                </span>
+
+                <span className="category-text">
+                  <strong>{category.name}</strong>
+                  <small>{category.shortDescription}</small>
+                </span>
+
+                <span className="category-footer">
+                  <span className="category-count">
+                    {count} {count === 1 ? "opção" : "opções"}
+                  </span>
+                  <ArrowRight size={18} className="category-arrow" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
 
         <Link className="explore-link" to="/categorias">
-          Prefiro ver por categoria <ArrowRight size={16} />
+          Ver todas as categorias <ArrowRight size={16} />
         </Link>
       </section>
 
