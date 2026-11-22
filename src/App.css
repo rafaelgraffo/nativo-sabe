@@ -620,13 +620,27 @@ button {
 }
 
 .about > div:first-child {
-  max-width: 560px;
+  max-width: 720px;
 }
 
 .about p {
+  margin: 0 0 14px;
   color: #6d7e71;
   font-size: 13px;
   line-height: 1.8;
+}
+
+.about p:last-child {
+  margin-bottom: 0;
+}
+
+.about-link {
+  color: #247253;
+  font-weight: 700;
+}
+
+.about-link:hover {
+  text-decoration: underline;
 }
 
 .about-mark {
