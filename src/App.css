@@ -500,6 +500,14 @@ button {
   gap: 30px 55px;
 }
 
+.donation-content-main {
+  min-width: 0;
+}
+
+.pix-block {
+  margin-top: 22px;
+}
+
 .donation .eyebrow {
   color: #a6d3b5;
 }
@@ -519,7 +527,6 @@ button {
 }
 
 .pix-actions {
-  margin-top: 22px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -540,8 +547,29 @@ button {
 }
 
 .pix-key {
-  color: #b8cdbf;
-  font-size: 11px;
+  color: #d7e6da;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.pix-owner {
+  margin-top: 16px;
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-top: 1px solid #ffffff20;
+}
+
+.pix-owner strong {
+  color: #f2f8f3;
+  font-size: 12px;
+}
+
+.pix-owner span {
+  color: #a6d3b5;
+  font-size: 10px;
 }
 
 .pix-qr {
