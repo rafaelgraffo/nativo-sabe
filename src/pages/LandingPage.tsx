@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Search } from "lucide-react";
 import { DonationSection } from "../components/DonationSection";
+import { PlaceCard } from "../components/PlaceCard";
 import { categories, places } from "../data/places";
 import { asset } from "../utils/asset";
 
 export function LandingPage() {
+  const sortedPlaces = [...places].sort(
+    (a, b) => Number(Boolean(a.isExample)) - Number(Boolean(b.isExample)),
+  );
+
   return (
     <main>
       <div className="banner-container">
@@ -31,7 +36,7 @@ export function LandingPage() {
             região. Tudo em um guia local, confiável e gratuito.
           </p>
 
-          <Link className="hero-cta" to="/categorias">
+          <Link className="hero-cta" to="/?section=explorar">
             <Search size={19} /> Explorar o guia <ArrowRight size={16} />
           </Link>
 
@@ -94,6 +99,29 @@ export function LandingPage() {
             );
           })}
         </div>
+      </section>
+
+      <section className="explore section" id="explorar">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">EXPLORAR</span>
+            <h2>Lugares para conhecer</h2>
+          </div>
+
+          <p>
+            Clique em um lugar para ver detalhes, localização e contato.
+          </p>
+        </div>
+
+        <div className="places-grid">
+          {sortedPlaces.map((place) => (
+            <PlaceCard key={place.id} place={place} />
+          ))}
+        </div>
+
+        <Link className="explore-link" to="/categorias">
+          Prefiro ver por categoria <ArrowRight size={16} />
+        </Link>
       </section>
 
       <DonationSection />

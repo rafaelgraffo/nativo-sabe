@@ -21,6 +21,9 @@ export function Header() {
         id="menu-principal"
         className={`desktop-nav${menuOpen ? " open" : ""}`}
       >
+        <Link to="/?section=explorar" onClick={closeMenu}>
+          Explorar
+        </Link>
         <Link to="/categorias" onClick={closeMenu}>
           Categorias
         </Link>
@@ -32,8 +35,8 @@ export function Header() {
         </Link>
       </nav>
 
-      <Link className="header-link" to="/categorias">
-        Ver guia <ArrowRight size={16} />
+      <Link className="header-link" to="/?section=explorar">
+        Explorar <ArrowRight size={16} />
       </Link>
 
       <button

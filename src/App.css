@@ -815,6 +815,20 @@ button {
   color: #7b9b85;
 }
 
+.explore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  color: #247253;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.explore-link:hover {
+  text-decoration: underline;
+}
+
 .detail-card {
   max-width: 920px;
   display: grid;
