@@ -24,7 +24,13 @@ function App() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] =
     useState<SelectedCategory>("todos");
+  const [selectedLocation, setSelectedLocation] = useState("todos");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const locations = useMemo(
+    () => [...new Set(places.map((place) => place.location))].sort(),
+    [],
+  );
 
   const filteredPlaces = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -34,6 +40,10 @@ function App() {
         selectedCategory === "todos" ||
         place.category === selectedCategory;
 
+      const matchesLocation =
+        selectedLocation === "todos" ||
+        place.location === selectedLocation;
+
       const matchesSearch =
         !term ||
         [place.name, place.kind, place.description, place.location]
@@ -41,9 +51,11 @@ function App() {
           .toLowerCase()
           .includes(term);
 
-      return matchesCategory && matchesSearch;
-    });
-  }, [search, selectedCategory]);
+      return matchesCategory && matchesLocation && matchesSearch;
+    }).sort(
+      (a, b) => Number(Boolean(a.isExample)) - Number(Boolean(b.isExample)),
+    );
+  }, [search, selectedCategory, selectedLocation]);
 
   const selectCategory = (id: CategoryId) => {
     setSelectedCategory((current) => (current === id ? "todos" : id));
@@ -225,6 +237,7 @@ function App() {
               type="button"
               onClick={() => {
                 setSelectedCategory("todos");
+                setSelectedLocation("todos");
                 setSearch("");
               }}
             >
@@ -257,6 +270,33 @@ function App() {
             ))}
           </div>
 
+          <div className="filter-row location-row">
+            <span className="filter-label">Por bairro:</span>
+
+            <button
+              className={
+                selectedLocation === "todos" ? "filter active" : "filter"
+              }
+              type="button"
+              onClick={() => setSelectedLocation("todos")}
+            >
+              Todos
+            </button>
+
+            {locations.map((location) => (
+              <button
+                key={location}
+                className={
+                  selectedLocation === location ? "filter active" : "filter"
+                }
+                type="button"
+                onClick={() => setSelectedLocation(location)}
+              >
+                {location}
+              </button>
+            ))}
+          </div>
+
           <div className="places-grid">
             {filteredPlaces.map((place) => (
               <article className="place-card" key={place.id}>
@@ -284,7 +324,7 @@ function App() {
                         Exemplo em validação
                       </span>
                     ) : (
-                      <span className="verified">Informação do guia</span>
+                      <span className="verified">Essencial</span>
                     )}
 
                     {place.contact ? (
