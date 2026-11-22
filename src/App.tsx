@@ -77,7 +77,7 @@ function App() {
             Explorar
           </a>
           <a href="#apoiar" onClick={closeMenu}>
-            Apoiar
+            Doações
           </a>
           <a href="#sobre" onClick={closeMenu}>
             Sobre o projeto
@@ -361,7 +361,7 @@ function App() {
         </p>
 
         <a className="footer-support" href="#apoiar">
-          <Camera size={17} /> Apoiar o projeto
+          <Camera size={17} /> Fazer uma doação
         </a>
       </footer>
     </div>

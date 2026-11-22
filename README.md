@@ -43,7 +43,7 @@ npm run preview
 
 - **Categorias** é o índice: mostra os tipos de lugar e serviço.
 - **Explorar** são os resultados: lugares filtrados por categoria e busca.
-- **Apoiar** traz o donativo via Pix (copia e cola + QR Code).
+- **Doações** traz o donativo via Pix (copia e cola + QR Code).
 
 O guia é gratuito para visitantes e prestadores de serviço.
 

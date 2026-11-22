@@ -40,7 +40,7 @@ export function DonationSection() {
       <div className="donation-content">
         <div className="donation-content-main">
           <span className="eyebrow">
-            <Heart size={14} /> APOIE O PROJETO
+            <Heart size={14} /> DOAÇÕES
           </span>
 
           <h2>Ajude a manter o Nativo Sabe gratuito.</h2>
