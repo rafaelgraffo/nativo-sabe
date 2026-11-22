@@ -385,7 +385,7 @@ function App() {
           </span>
 
           <span>
-            <strong>Nativo Sabe</strong>{" "}
+            <strong>Nativo Sabe</strong>
             <small>Cajueiro da Praia - PI</small>
           </span>
         </a>
