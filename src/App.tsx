@@ -305,11 +305,15 @@ function App() {
           <div>
             <span className="eyebrow">A IDEIA DO NATIVO SABE</span>
 
-            <h2>Informação local faz toda a diferença.</h2>
+            <h2>
+              Ninguém conhece um lugar melhor do que quem vive nele.
+            </h2>
 
             <p>
-              Um guia criado para aproximar visitantes dos lugares,
-              profissionais e negócios de Cajueiro da Praia.
+              São os moradores locais que guardam os melhores segredos sobre
+              onde comer, se hospedar e o que explorar. Criamos a ponte entre a
+              experiência de quem é da casa e a vontade de descobrir de quem
+              visita.
             </p>
           </div>
 
