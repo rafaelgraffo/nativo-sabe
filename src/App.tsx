@@ -1,70 +1,62 @@
 import { useMemo, useState } from "react";
 import {
-  Search,
-  MapPin,
-  Compass,
-  Utensils,
-  Store,
-  Waves,
-  Menu,
   ArrowRight,
   Camera,
+  Compass,
+  MapPin,
+  Menu,
   MessageCircle,
+  Search,
 } from "lucide-react";
+import { DonationSection } from "./components/DonationSection";
+import {
+  categories,
+  categoryName,
+  places,
+  type CategoryId,
+} from "./data/places";
 import "./App.css";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
-const categories = [
-  { name: "Praias e atrações", icon: Waves },
-  { name: "Onde comer", icon: Utensils },
-  { name: "Guias e passeios", icon: Compass },
-  { name: "Comércio local", icon: Store },
-];
-
-const places = [
-  {
-    name: "Praia de Barra Grande",
-    category: "Praias e atrações",
-    description:
-      "Um dos destinos turísticos conhecidos de Cajueiro da Praia.",
-  },
-  {
-    name: "Cajueiro-Rei",
-    category: "Praias e atrações",
-    description:
-      "Uma das referências naturais e turísticas do município.",
-  },
-  {
-    name: "Praia da Barrinha",
-    category: "Praias e atrações",
-    description:
-      "Uma das praias que fazem parte do litoral do município.",
-  },
-];
+type SelectedCategory = CategoryId | "todos";
 
 function App() {
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [selectedCategory, setSelectedCategory] =
+    useState<SelectedCategory>("todos");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const filteredPlaces = useMemo(() => {
-    return places.filter((place) => {
-      const matchesSearch = place.name
-        .toLowerCase()
-        .includes(search.toLowerCase());
+    const term = search.trim().toLowerCase();
 
+    return places.filter((place) => {
       const matchesCategory =
-        selectedCategory === "Todos" ||
+        selectedCategory === "todos" ||
         place.category === selectedCategory;
 
-      return matchesSearch && matchesCategory;
+      const matchesSearch =
+        !term ||
+        [place.name, place.kind, place.description, place.location]
+          .join(" ")
+          .toLowerCase()
+          .includes(term);
+
+      return matchesCategory && matchesSearch;
     });
   }, [search, selectedCategory]);
 
+  const selectCategory = (id: CategoryId) => {
+    setSelectedCategory((current) => (current === id ? "todos" : id));
+    document
+      .getElementById("explorar")
+      ?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <div className="app">
-      {/* CABEÇALHO: Logo principal (quadrada) no canto superior esquerdo */}
       <header className="header">
         <a className="brand" href="#">
           <img
@@ -78,13 +70,16 @@ function App() {
           id="menu-principal"
           className={`desktop-nav${menuOpen ? " open" : ""}`}
         >
-          <a href="#explorar" onClick={() => setMenuOpen(false)}>
-            Explorar
-          </a>
-          <a href="#categorias" onClick={() => setMenuOpen(false)}>
+          <a href="#categorias" onClick={closeMenu}>
             Categorias
           </a>
-          <a href="#sobre" onClick={() => setMenuOpen(false)}>
+          <a href="#explorar" onClick={closeMenu}>
+            Explorar
+          </a>
+          <a href="#apoiar" onClick={closeMenu}>
+            Apoiar
+          </a>
+          <a href="#sobre" onClick={closeMenu}>
             Sobre o projeto
           </a>
         </nav>
@@ -106,17 +101,14 @@ function App() {
       </header>
 
       <main>
-        {/* BANNER / LOGO HORIZONTAL: Logo abaixo da barra de navegação */}
-        <div className="banner-container" style={{ width: "100%", padding: "1rem 2rem", textAlign: "center" }}>
+        <div className="banner-container">
           <img
             className="hero-horizontal-logo"
             src={asset("imagens/logo-horizontal.jpg")}
-            alt="Nativo Sabe Banner"
-            style={{ maxWidth: "100%", height: "auto", display: "block", margin: "0 auto" }}
+            alt="Nativo Sabe — Guia local de Cajueiro da Praia"
           />
         </div>
 
-        {/* APRESENTAÇÃO PRINCIPAL */}
         <section className="hero">
           <div className="hero-content">
             <span className="eyebrow">
@@ -129,8 +121,8 @@ function App() {
             </h1>
 
             <p>
-              Descubra lugares, sabores, passeios e experiências locais.
-              Encontre o que procura com a ajuda de quem conhece a região.
+              Onde comer, o que visitar, guias e prestadores de serviço da
+              região. Tudo em um guia local, confiável e gratuito.
             </p>
 
             <form
@@ -156,7 +148,7 @@ function App() {
 
             <div className="hero-note">
               <span className="note-dot" />
-              Um guia local, simples e feito para facilitar sua descoberta.
+              Gratuito para visitantes e prestadores de serviço.
             </div>
           </div>
 
@@ -169,65 +161,71 @@ function App() {
           </div>
         </section>
 
-        {/* CATEGORIAS */}
         <section className="categories section" id="categorias">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">GUIA LOCAL</span>
-              <h2>O que você quer descobrir?</h2>
+              <span className="eyebrow">POR ONDE COMEÇAR</span>
+              <h2>O que você procura?</h2>
             </div>
 
             <p>
-              Encontre opções para aproveitar melhor sua visita.
+              Escolha um tipo de lugar ou serviço para ver as opções do guia.
             </p>
           </div>
 
           <div className="category-grid">
             {categories.map((category) => {
               const Icon = category.icon;
+              const count = places.filter(
+                (place) => place.category === category.id,
+              ).length;
 
               return (
                 <button
                   className={`category-card ${
-                    selectedCategory === category.name ? "selected" : ""
+                    selectedCategory === category.id ? "selected" : ""
                   }`}
-                  key={category.name}
-                  onClick={() =>
-                    setSelectedCategory(
-                      selectedCategory === category.name
-                        ? "Todos"
-                        : category.name
-                    )
-                  }
+                  key={category.id}
+                  type="button"
+                  onClick={() => selectCategory(category.id)}
                 >
                   <span className="category-icon">
                     <Icon size={25} />
                   </span>
 
-                  <strong>{category.name}</strong>
+                  <span className="category-text">
+                    <strong>{category.name}</strong>
+                    <small>{category.shortDescription}</small>
+                  </span>
 
-                  <ArrowRight
-                    size={18}
-                    className="category-arrow"
-                  />
+                  <span className="category-footer">
+                    <span className="category-count">
+                      {count} {count === 1 ? "opção" : "opções"}
+                    </span>
+                    <ArrowRight size={18} className="category-arrow" />
+                  </span>
                 </button>
               );
             })}
           </div>
         </section>
 
-        {/* EXPLORAR LUGARES */}
         <section className="explore section" id="explorar">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">PRIMEIROS DESTINOS</span>
-              <h2>Conheça alguns lugares</h2>
+              <span className="eyebrow">RESULTADOS DO GUIA</span>
+              <h2>
+                {selectedCategory === "todos"
+                  ? "Explore os lugares"
+                  : categoryName(selectedCategory)}
+              </h2>
             </div>
 
             <button
               className="clear-filter"
+              type="button"
               onClick={() => {
-                setSelectedCategory("Todos");
+                setSelectedCategory("todos");
                 setSearch("");
               }}
             >
@@ -238,26 +236,22 @@ function App() {
           <div className="filter-row">
             <button
               className={
-                selectedCategory === "Todos"
-                  ? "filter active"
-                  : "filter"
+                selectedCategory === "todos" ? "filter active" : "filter"
               }
-              onClick={() => setSelectedCategory("Todos")}
+              type="button"
+              onClick={() => setSelectedCategory("todos")}
             >
               Todos
             </button>
 
             {categories.map((category) => (
               <button
-                key={category.name}
+                key={category.id}
                 className={
-                  selectedCategory === category.name
-                    ? "filter active"
-                    : "filter"
+                  selectedCategory === category.id ? "filter active" : "filter"
                 }
-                onClick={() =>
-                  setSelectedCategory(category.name)
-                }
+                type="button"
+                onClick={() => setSelectedCategory(category.id)}
               >
                 {category.name}
               </button>
@@ -266,24 +260,47 @@ function App() {
 
           <div className="places-grid">
             {filteredPlaces.map((place) => (
-              <article className="place-card" key={place.name}>
+              <article className="place-card" key={place.id}>
                 <div className="place-image">
-                  <span>Local em validação</span>
+                  <span>{place.kind}</span>
                 </div>
 
                 <div className="place-info">
                   <span className="place-category">
-                    {place.category}
+                    {categoryName(place.category)}
                   </span>
 
                   <h3>{place.name}</h3>
 
                   <p>{place.description}</p>
 
-                  <span className="pending">
-                    <span />
-                    Informações sendo verificadas
+                  <span className="place-location">
+                    <MapPin size={13} /> {place.location}
                   </span>
+
+                  <div className="place-footer">
+                    {place.isExample ? (
+                      <span className="pending">
+                        <span />
+                        Exemplo em validação
+                      </span>
+                    ) : (
+                      <span className="verified">Informação do guia</span>
+                    )}
+
+                    {place.contact ? (
+                      <a
+                        className="contact-button"
+                        href={`https://wa.me/${place.contact}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <MessageCircle size={14} /> Contato
+                      </a>
+                    ) : (
+                      <span className="contact-soon">Contato em breve</span>
+                    )}
+                  </div>
                 </div>
               </article>
             ))}
@@ -302,7 +319,8 @@ function App() {
           </div>
         </section>
 
-        {/* SOBRE O PROJETO */}
+        <DonationSection />
+
         <section className="about" id="sobre">
           <div>
             <span className="eyebrow">A IDEIA DO NATIVO SABE</span>
@@ -326,7 +344,6 @@ function App() {
         </section>
       </main>
 
-      {/* RODAPÉ */}
       <footer className="footer">
         <a className="brand footer-brand" href="#">
           <span className="brand-icon">
@@ -340,13 +357,12 @@ function App() {
         </a>
 
         <p>
-          Um guia local em construção, feito para valorizar a região.
+          Guia local gratuito, feito para valorizar a região.
         </p>
 
-        <span className="footer-icons">
-          <Camera size={19} />
-          <MessageCircle size={19} />
-        </span>
+        <a className="footer-support" href="#apoiar">
+          <Camera size={17} /> Apoiar o projeto
+        </a>
       </footer>
     </div>
   );
