@@ -194,3 +194,9 @@ export const places: Place[] = [
 
 export const categoryName = (id: CategoryId) =>
   categories.find((category) => category.id === id)?.name ?? "Todos";
+
+export const getCategory = (id: string) =>
+  categories.find((category) => category.id === id);
+
+export const getPlace = (id: string) =>
+  places.find((place) => place.id === id);

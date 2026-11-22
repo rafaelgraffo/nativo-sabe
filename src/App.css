@@ -718,6 +718,165 @@ button {
   font-weight: 700;
 }
 
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 15px 23px;
+  border-radius: 10px;
+  background: #205c46;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.hero-cta:hover {
+  background: #174937;
+  transform: translateY(-2px);
+}
+
+.inner-page {
+  min-height: calc(100vh - 190px);
+  padding: 42px 9% 70px;
+  background: #fbfaf6;
+}
+
+.page-heading {
+  max-width: 760px;
+  margin-bottom: 30px;
+}
+
+.page-heading h1 {
+  margin: 9px 0;
+  color: #1d3c32;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(30px, 4vw, 42px);
+  letter-spacing: -1.6px;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #7a877e;
+  font-size: 13px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 24px;
+  color: #398064;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.catalog-controls {
+  margin-bottom: 26px;
+  padding: 20px;
+  border: 1px solid #eeece5;
+  border-radius: 14px;
+  background: white;
+}
+
+.catalog-search {
+  max-width: 420px;
+  height: 48px;
+  margin-bottom: 18px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e7e8df;
+  border-radius: 10px;
+  color: #6c8175;
+}
+
+.catalog-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: #18352f;
+  font-size: 12px;
+}
+
+.catalog-controls .filter-row {
+  margin: 0;
+}
+
+.card-arrow {
+  flex-shrink: 0;
+  color: #7b9b85;
+}
+
+.detail-card {
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  overflow: hidden;
+  border: 1px solid #eae9e1;
+  border-radius: 16px;
+  background: white;
+}
+
+.detail-image {
+  min-height: 340px;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: linear-gradient(140deg, #e5eddf, #c4ded0);
+  color: #54836d;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.detail-content {
+  padding: 40px;
+}
+
+.detail-content h1 {
+  margin: 10px 0;
+  color: #1d3c32;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: -1.4px;
+}
+
+.detail-content > p {
+  color: #6d7e71;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.detail-meta {
+  margin: 18px 0;
+}
+
+.detail-contact {
+  margin-top: 6px;
+  background: #205c46;
+  color: white;
+}
+
+.detail-note {
+  margin-top: 28px !important;
+  padding-top: 18px;
+  border-top: 1px solid #f0efe9;
+  font-size: 11px !important;
+}
+
+.donation-page .donation,
+.about-page .about {
+  border-radius: 16px;
+}
+
 @media (max-width: 850px) {
   .header {
     padding: 0 5%;
@@ -914,6 +1073,45 @@ button {
     margin-top: 8px;
     padding-top: 8px;
     flex-wrap: wrap;
+  }
+
+  .hero-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .inner-page {
+    padding: 28px 6% 50px;
+  }
+
+  .page-heading h1 {
+    font-size: 30px;
+    letter-spacing: -1.2px;
+  }
+
+  .catalog-controls {
+    padding: 14px;
+  }
+
+  .catalog-search {
+    max-width: none;
+  }
+
+  .detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-image {
+    min-height: 150px;
+  }
+
+  .detail-content {
+    padding: 22px;
+  }
+
+  .donation-page .donation,
+  .about-page .about {
+    padding: 34px 20px;
   }
 
   .about {
