@@ -652,6 +652,13 @@ button {
   color: #398064;
 }
 
+.about-mark-image {
+  width: 190px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .about-mark strong {
   color: #28513f;
   font-size: 12px;
@@ -823,6 +830,10 @@ button {
 
   .about-mark {
     align-items: flex-start;
+  }
+
+  .about-mark-image {
+    width: 160px;
   }
 
   .footer {

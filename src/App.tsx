@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import {
   ArrowRight,
   Camera,
-  Compass,
   MapPin,
   Menu,
   MessageCircle,
@@ -369,7 +368,11 @@ function App() {
           </div>
 
           <div className="about-mark">
-            <Compass size={58} strokeWidth={1.2} />
+            <img
+              className="about-mark-image"
+              src={asset("imagens/Nativo_manja.jpg")}
+              alt="Nativo Sabe — quem é daqui, sabe"
+            />
             <strong>Quem é daqui, sabe.</strong>
           </div>
         </section>
