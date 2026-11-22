@@ -6,7 +6,7 @@ export function AboutPage() {
   return (
     <main className="inner-page about-page">
       <Link className="back-link" to="/">
-        <ArrowLeft size={15} /> Início
+        <ArrowLeft size={15} /> Voltar para o início
       </Link>
 
       <section className="about">

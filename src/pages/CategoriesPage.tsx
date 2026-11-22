@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { categories, places } from "../data/places";
 
 export function CategoriesPage() {
   return (
     <main className="inner-page">
+      <Link className="back-link" to="/">
+        <ArrowLeft size={15} /> Voltar para o início
+      </Link>
+
       <div className="page-heading">
         <span className="eyebrow">O GUIA</span>
         <h1>O que você procura?</h1>
