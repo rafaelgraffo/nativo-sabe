@@ -51,8 +51,8 @@ export function CategoryPage() {
       <main className="inner-page">
         <div className="page-heading">
           <h1>Categoria não encontrada</h1>
-          <Link className="back-link" to="/categorias">
-            <ArrowLeft size={15} /> Ver categorias
+          <Link className="back-link" to="/">
+            <ArrowLeft size={15} /> Voltar para o início
           </Link>
         </div>
       </main>
@@ -61,8 +61,8 @@ export function CategoryPage() {
 
   return (
     <main className="inner-page catalog-page">
-      <Link className="back-link" to="/categorias">
-        <ArrowLeft size={15} /> Todas as categorias
+      <Link className="back-link" to="/">
+        <ArrowLeft size={15} /> Voltar para o início
       </Link>
 
       <div className="page-heading">

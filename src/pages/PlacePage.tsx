@@ -11,8 +11,8 @@ export function PlacePage() {
       <main className="inner-page">
         <div className="page-heading">
           <h1>Lugar não encontrado</h1>
-          <Link className="back-link" to="/categorias">
-            <ArrowLeft size={15} /> Ver categorias
+          <Link className="back-link" to="/">
+            <ArrowLeft size={15} /> Voltar para o início
           </Link>
         </div>
       </main>
@@ -21,8 +21,8 @@ export function PlacePage() {
 
   return (
     <main className="inner-page detail-page">
-      <Link className="back-link" to={`/categoria/${place.category}`}>
-        <ArrowLeft size={15} /> {categoryName(place.category)}
+      <Link className="back-link" to="/">
+        <ArrowLeft size={15} /> Voltar para o início
       </Link>
 
       <div className="detail-card">
