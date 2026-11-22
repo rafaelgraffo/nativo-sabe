@@ -9,9 +9,12 @@ export function ScrollToTop() {
 
     if (section) {
       requestAnimationFrame(() => {
-        document
-          .getElementById(section)
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        const element = document.getElementById(section);
+
+        if (!element) return;
+
+        const top = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo(0, top);
       });
       return;
     }
