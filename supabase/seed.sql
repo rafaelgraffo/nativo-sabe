@@ -6,8 +6,10 @@ insert into public.categories (id, name, short_description, icon, sort_order) va
   ('acai-sorvetes', 'Açaí e sorvetes', 'Doce e refrescante', 'CupSoda', 2),
   ('pontos-turisticos', 'Pontos turísticos', 'O que vale conhecer', 'Camera', 3),
   ('guias', 'Guias locais', 'Quem conhece de verdade', 'Compass', 4),
-  ('servicos', 'Serviços locais', 'Churrasqueiro, transfer e mais', 'Wrench', 5),
-  ('comercio', 'Comércio local', 'Negócios da região', 'Store', 6)
+  ('servicos', 'Serviços', 'Churrasqueiro, transfer e mais', 'Wrench', 5),
+  ('comercio', 'Comércio local', 'Negócios da região', 'Store', 6),
+  ('deposito-bebidas', 'Depósito de Bebidas', 'Bebidas para levar', 'Wine', 7),
+  ('pescados-frutos-do-mar', 'Pescados e Frutos do Mar', 'Peixes, camarão e mais', 'Fish', 8)
 on conflict (id) do update set
   name = excluded.name,
   short_description = excluded.short_description,

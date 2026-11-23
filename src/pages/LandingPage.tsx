@@ -1,20 +1,19 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Search } from "lucide-react";
+import { ArrowRight, ChevronDown, LayoutGrid, MapPin } from "lucide-react";
 import { CategoryCard } from "../components/CategoryCard";
 import { DonationSection } from "../components/DonationSection";
 import { PlaceCard } from "../components/PlaceCard";
-import { isExploreCategory, useCatalog } from "../data/catalog";
+import { useCatalog } from "../data/catalog";
+import { otherCategories, primaryCategories } from "../data/categoryOrder";
 import { asset } from "../utils/asset";
 
 export function LandingPage() {
   const { categories, places } = useCatalog();
-  const catalogCategories = categories.filter(
-    (category) => !isExploreCategory(category.id),
-  );
-  const exploreCategories = categories.filter((category) =>
-    isExploreCategory(category.id),
-  );
+  const featured = primaryCategories(categories);
+  const others = otherCategories(categories);
   const featuredPlaces = places.filter((place) => !place.isExample).slice(0, 3);
+  const countFor = (categoryId: string) =>
+    places.filter((place) => place.category === categoryId).length;
 
   return (
     <main>
@@ -51,11 +50,9 @@ export function LandingPage() {
           </p>
 
           <div className="hero-actions">
-            <Link className="hero-cta" to="/?section=explorar">
-              <Search size={19} /> Explorar o guia <ArrowRight size={16} />
-            </Link>
-            <Link className="hero-secondary" to="/categorias">
-              Ver categorias
+            <Link className="hero-cta" to="/categorias">
+              <LayoutGrid size={19} /> Descobrir categorias{" "}
+              <ArrowRight size={16} />
             </Link>
           </div>
 
@@ -89,43 +86,40 @@ export function LandingPage() {
           </p>
         </div>
 
-        <div className="category-grid">
-          {catalogCategories.map((category) => (
+        <div className="category-grid featured-grid">
+          {featured.map((category) => (
             <CategoryCard
               key={category.id}
               category={category}
-              count={places.filter((place) => place.category === category.id).length}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section className="explore section" id="explorar">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">EXPLORAR</span>
-            <h2>O que vale conhecer por aqui</h2>
-          </div>
-
-          <p>
-            Escolha uma das áreas abaixo para descobrir os lugares e quem faz
-            Cajueiro da Praia acontecer.
-          </p>
-        </div>
-
-        <div className="category-grid">
-          {exploreCategories.map((category) => (
-            <CategoryCard
-              key={category.id}
-              category={category}
-              count={places.filter((place) => place.category === category.id).length}
+              count={countFor(category.id)}
             />
           ))}
         </div>
 
-        <Link className="explore-link" to="/categorias">
-          Ver todas as categorias <ArrowRight size={16} />
-        </Link>
+        {others.length > 0 && (
+          <details className="more-options">
+            <summary className="more-options-trigger">
+              <span>Outros</span>
+              <ChevronDown
+                size={19}
+                className="more-options-chevron"
+                aria-hidden="true"
+              />
+            </summary>
+
+            <div className="more-options-panel">
+              <div className="category-grid">
+                {others.map((category) => (
+                  <CategoryCard
+                    key={category.id}
+                    category={category}
+                    count={countFor(category.id)}
+                  />
+                ))}
+              </div>
+            </div>
+          </details>
+        )}
       </section>
 
       {featuredPlaces.length > 0 && (

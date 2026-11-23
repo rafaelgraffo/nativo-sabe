@@ -1,23 +1,16 @@
-import { Compass, Heart, Home, LayoutGrid } from "lucide-react";
+import { Heart, Home, LayoutGrid } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 export function MobileNav() {
-  const { pathname, search } = useLocation();
+  const { pathname } = useLocation();
   const isHome = pathname === "/";
-  const isExplore = isHome && search.includes("section=explorar");
 
   const items = [
     {
       to: "/",
       label: "Início",
       icon: Home,
-      active: isHome && !isExplore,
-    },
-    {
-      to: "/?section=explorar",
-      label: "Explorar",
-      icon: Compass,
-      active: isExplore,
+      active: isHome,
     },
     {
       to: "/categorias",

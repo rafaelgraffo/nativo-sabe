@@ -3,7 +3,9 @@ import {
   Coffee,
   Compass,
   CupSoda,
+  Fish,
   Store,
+  Wine,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -14,7 +16,9 @@ export type CategoryId =
   | "pontos-turisticos"
   | "guias"
   | "servicos"
-  | "comercio";
+  | "comercio"
+  | "deposito-bebidas"
+  | "pescados-frutos-do-mar";
 
 export type Category = {
   id: CategoryId;
@@ -61,7 +65,7 @@ export const categories: Category[] = [
   },
   {
     id: "servicos",
-    name: "Serviços locais",
+    name: "Serviços",
     shortDescription: "Churrasqueiro, transfer e mais",
     icon: Wrench,
   },
@@ -70,6 +74,18 @@ export const categories: Category[] = [
     name: "Comércio local",
     shortDescription: "Negócios da região",
     icon: Store,
+  },
+  {
+    id: "deposito-bebidas",
+    name: "Depósito de Bebidas",
+    shortDescription: "Bebidas para levar",
+    icon: Wine,
+  },
+  {
+    id: "pescados-frutos-do-mar",
+    name: "Pescados e Frutos do Mar",
+    shortDescription: "Peixes, camarão e mais",
+    icon: Fish,
   },
 ];
 

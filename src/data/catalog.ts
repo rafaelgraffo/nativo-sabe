@@ -4,8 +4,10 @@ import {
   Coffee,
   Compass,
   CupSoda,
+  Fish,
   MapPin,
   Store,
+  Wine,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -49,17 +51,14 @@ export type Catalog = CatalogData & {
   getPlace: (id: string) => Place | undefined;
 };
 
-export const exploreCategoryIds = ["pontos-turisticos", "guias", "servicos"];
-
-export const isExploreCategory = (id: string) =>
-  exploreCategoryIds.includes(id);
-
 const categoryIcons: Record<string, LucideIcon> = {
   Camera,
   Coffee,
   Compass,
   CupSoda,
+  Fish,
   Store,
+  Wine,
   Wrench,
 };
 

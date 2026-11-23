@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { MapPin, MessageCircle, PiggyBank } from "lucide-react";
-
-const WHATSAPP_URL = `https://wa.me/5586988769284?text=${encodeURIComponent(
-  "Olá! Conheci o Nativo Sabe e gostaria de entrar em contato.",
-)}`;
+import { ArrowUpRight, MapPin, PiggyBank } from "lucide-react";
+import { WhatsAppIcon } from "./WhatsAppIcon";
+import {
+  WHATSAPP_CONTACT_LABEL,
+  WHATSAPP_CONTACT_URL,
+} from "../data/contact";
 
 export function Footer() {
   return (
@@ -25,17 +26,35 @@ export function Footer() {
       </p>
 
       <div className="footer-links">
-        <Link className="footer-support" to="/apoiar">
-          <PiggyBank size={18} /> Fazer uma doação
+        <Link className="footer-action footer-action-donate" to="/apoiar">
+          <span className="footer-action-icon">
+            <PiggyBank size={20} />
+          </span>
+
+          <span className="footer-action-text">
+            <strong>Fazer uma doação</strong>
+            <small>Ajude a manter o guia gratuito</small>
+          </span>
+
+          <ArrowUpRight size={16} aria-hidden="true" />
         </Link>
 
         <a
-          className="footer-support"
-          href={WHATSAPP_URL}
+          className="footer-action footer-action-contact"
+          href={WHATSAPP_CONTACT_URL}
           target="_blank"
           rel="noreferrer"
         >
-          <MessageCircle size={18} /> Fale Conosco
+          <span className="footer-action-icon">
+            <WhatsAppIcon size={20} />
+          </span>
+
+          <span className="footer-action-text">
+            <strong>{WHATSAPP_CONTACT_LABEL}</strong>
+            <small>Converse com a equipe no WhatsApp</small>
+          </span>
+
+          <ArrowUpRight size={16} aria-hidden="true" />
         </a>
       </div>
     </footer>

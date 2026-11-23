@@ -1,5 +1,6 @@
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { DonationReminder } from "./components/DonationReminder";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { MobileNav } from "./components/MobileNav";
@@ -44,6 +45,7 @@ export default function App() {
 
       <Footer />
       <MobileNav />
+      <DonationReminder />
     </div>
   );
 }

@@ -1,23 +1,17 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Compass, Heart, Info, LayoutGrid, Menu } from "lucide-react";
+import { Heart, Info, LayoutGrid, Menu } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { WhatsAppIcon } from "./WhatsAppIcon";
+import { WHATSAPP_CONTACT_LABEL, WHATSAPP_CONTACT_URL } from "../data/contact";
 import { asset } from "../utils/asset";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { pathname, search } = useLocation();
+  const { pathname } = useLocation();
   const closeMenu = () => setMenuOpen(false);
 
-  const isExplore = pathname === "/" && search.includes("section=explorar");
-
   const navItems = [
-    {
-      to: "/?section=explorar",
-      label: "Explorar",
-      icon: Compass,
-      active: isExplore,
-    },
     {
       to: "/categorias",
       label: "Categorias",
@@ -65,9 +59,30 @@ export function Header() {
             <span>{label}</span>
           </Link>
         ))}
+
+        <a
+          className="nav-link nav-contact"
+          href={WHATSAPP_CONTACT_URL}
+          target="_blank"
+          rel="noreferrer"
+          onClick={closeMenu}
+        >
+          <WhatsAppIcon size={17} />
+          <span>{WHATSAPP_CONTACT_LABEL}</span>
+        </a>
       </nav>
 
       <div className="header-actions">
+        <a
+          className="header-contact-icon"
+          href={WHATSAPP_CONTACT_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${WHATSAPP_CONTACT_LABEL} no WhatsApp`}
+        >
+          <WhatsAppIcon size={20} />
+        </a>
+
         <ThemeToggle />
 
         <button
