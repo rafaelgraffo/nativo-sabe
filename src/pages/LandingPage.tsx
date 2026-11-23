@@ -177,7 +177,8 @@ export function LandingPage() {
 
           <p>
             A nossa embaixadora é a Dona Neda, da Barraca da Nêda — artesã
-            renomada e figura queridíssima de Cajueiro, no Instagram{" "}
+            renomada e figura queridíssima de Cajueiro da Praia, siga no
+            Instagram{" "}
             <a
               className="about-link"
               href="https://www.instagram.com/barracadaneda/"
