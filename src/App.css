@@ -964,6 +964,13 @@ button {
   font-weight: 700;
 }
 
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
 .hero-cta {
   display: inline-flex;
   align-items: center;
