@@ -74,6 +74,27 @@ export function LandingPage() {
         </span>
       </section>
 
+      {featuredPlaces.length > 0 && (
+        <section className="featured section" id="destaques">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">DESTAQUES DO GUIA</span>
+              <h2>Lugares que valem conhecer</h2>
+            </div>
+            <p>
+              Um primeiro olhar sobre os destinos que contam a história da
+              região.
+            </p>
+          </div>
+
+          <div className="places-grid">
+            {featuredPlaces.map((place) => (
+              <PlaceCard key={place.id} place={place} />
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="categories section" id="categorias">
         <div className="section-heading">
           <div>
@@ -121,27 +142,6 @@ export function LandingPage() {
           </details>
         )}
       </section>
-
-      {featuredPlaces.length > 0 && (
-        <section className="featured section" id="destaques">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">DESTAQUES DO GUIA</span>
-              <h2>Lugares que valem conhecer</h2>
-            </div>
-            <p>
-              Um primeiro olhar sobre os destinos que contam a história da
-              região.
-            </p>
-          </div>
-
-          <div className="places-grid">
-            {featuredPlaces.map((place) => (
-              <PlaceCard key={place.id} place={place} />
-            ))}
-          </div>
-        </section>
-      )}
 
       <DonationSection />
 
