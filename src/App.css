@@ -82,18 +82,6 @@ button {
   color: #247253;
 }
 
-.header-link {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 12px 17px;
-  border-radius: 9px;
-  background: #205c46;
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-}
-
 .mobile-menu {
   display: none;
   border: 0;
@@ -896,8 +884,7 @@ button {
     padding: 0 5%;
   }
 
-  .desktop-nav,
-  .header-link {
+  .desktop-nav {
     display: none;
   }
 

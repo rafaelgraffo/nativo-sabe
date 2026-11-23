@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { asset } from "../utils/asset";
 
 export function Header() {
@@ -34,10 +34,6 @@ export function Header() {
           Sobre o projeto
         </Link>
       </nav>
-
-      <Link className="header-link" to="/?section=explorar">
-        Explorar <ArrowRight size={16} />
-      </Link>
 
       <button
         className="mobile-menu"
