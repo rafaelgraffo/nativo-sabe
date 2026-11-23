@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useCatalog } from "../data/catalog";
+import { isExploreCategory, useCatalog } from "../data/catalog";
 
 export function CategoriesPage() {
   const { categories, places } = useCatalog();
+  const catalogCategories = categories.filter(
+    (category) => !isExploreCategory(category.id),
+  );
 
   return (
     <main className="inner-page">
@@ -18,7 +21,7 @@ export function CategoriesPage() {
       </div>
 
       <div className="category-grid">
-        {categories.map((category) => {
+        {catalogCategories.map((category) => {
           const Icon = category.icon;
           const count = places.filter(
             (place) => place.category === category.id,
