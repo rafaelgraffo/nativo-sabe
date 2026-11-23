@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
-import { categoryName, getPlace } from "../data/places";
+import { useCatalog } from "../data/catalog";
 
 export function PlacePage() {
   const { placeId = "" } = useParams();
+  const { categoryName, getPlace } = useCatalog();
   const place = getPlace(placeId);
 
   if (!place) {

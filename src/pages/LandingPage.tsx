@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Search } from "lucide-react";
 import { DonationSection } from "../components/DonationSection";
-import { categories, places } from "../data/places";
+import { useCatalog } from "../data/catalog";
 import { asset } from "../utils/asset";
 
 const exploreCategoryIds = ["pontos-turisticos", "guias", "servicos"];
 
 export function LandingPage() {
+  const { categories, places } = useCatalog();
   const exploreCategories = categories.filter((category) =>
     exploreCategoryIds.includes(category.id),
   );

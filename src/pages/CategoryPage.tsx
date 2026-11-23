@@ -2,15 +2,11 @@ import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, Search } from "lucide-react";
 import { PlaceCard } from "../components/PlaceCard";
-import {
-  categoryName,
-  getCategory,
-  places,
-  type CategoryId,
-} from "../data/places";
+import { useCatalog } from "../data/catalog";
 
 export function CategoryPage() {
   const { categoryId = "" } = useParams();
+  const { places, getCategory } = useCatalog();
   const category = getCategory(categoryId);
   const [search, setSearch] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("todos");
@@ -20,7 +16,7 @@ export function CategoryPage() {
       (place) => place.category === categoryId,
     );
     return [...new Set(fromCategory.map((place) => place.location))].sort();
-  }, [categoryId]);
+  }, [places, categoryId]);
 
   const results = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -44,7 +40,7 @@ export function CategoryPage() {
         (a, b) =>
           Number(Boolean(a.isExample)) - Number(Boolean(b.isExample)),
       );
-  }, [categoryId, search, selectedLocation]);
+  }, [places, categoryId, search, selectedLocation]);
 
   if (!category) {
     return (
@@ -67,7 +63,7 @@ export function CategoryPage() {
 
       <div className="page-heading">
         <span className="eyebrow">{category.shortDescription}</span>
-        <h1>{categoryName(categoryId as CategoryId)}</h1>
+        <h1>{category.name}</h1>
         <p>
           {results.length} {results.length === 1 ? "opção encontrada" : "opções encontradas"}
         </p>

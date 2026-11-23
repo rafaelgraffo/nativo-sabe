@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
-import { categoryName, type Place } from "../data/places";
+import { useCatalog } from "../data/catalog";
+import type { Place } from "../data/places";
 
 export function PlaceCard({ place }: { place: Place }) {
+  const { categoryName } = useCatalog();
+
   return (
     <Link className="place-card" to={`/lugar/${place.id}`}>
       <div className="place-image">

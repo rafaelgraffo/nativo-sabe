@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { categories, places } from "../data/places";
+import { useCatalog } from "../data/catalog";
 
 export function CategoriesPage() {
+  const { categories, places } = useCatalog();
+
   return (
     <main className="inner-page">
       <Link className="back-link" to="/">
