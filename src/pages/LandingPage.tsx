@@ -79,7 +79,7 @@ export function LandingPage() {
           <div className="section-heading">
             <div>
               <span className="eyebrow">DESTAQUES DO GUIA</span>
-              <h2>Lugares que valem conhecer</h2>
+              <h2>Rotas imperdíveis</h2>
             </div>
             <p>
               Um primeiro olhar sobre os destinos que contam a história da
