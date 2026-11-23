@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Search } from "lucide-react";
+import { CategoryCard } from "../components/CategoryCard";
 import { DonationSection } from "../components/DonationSection";
+import { PlaceCard } from "../components/PlaceCard";
 import { isExploreCategory, useCatalog } from "../data/catalog";
 import { asset } from "../utils/asset";
 
@@ -12,6 +14,7 @@ export function LandingPage() {
   const exploreCategories = categories.filter((category) =>
     isExploreCategory(category.id),
   );
+  const featuredPlaces = places.filter((place) => !place.isExample).slice(0, 3);
 
   return (
     <main>
@@ -24,6 +27,14 @@ export function LandingPage() {
       </div>
 
       <section className="hero">
+        <div className="hero-decoration" aria-hidden="true">
+          <img
+            className="hero-photo"
+            src={asset("imagens/praia-barra-grande.jpg")}
+            alt=""
+          />
+        </div>
+
         <div className="hero-content">
           <span className="eyebrow">
             <MapPin size={15} /> CAJUEIRO DA PRAIA · PIAUÍ
@@ -39,9 +50,21 @@ export function LandingPage() {
             região. Tudo em um guia local, confiável e gratuito.
           </p>
 
-          <Link className="hero-cta" to="/?section=explorar">
-            <Search size={19} /> Explorar o guia <ArrowRight size={16} />
-          </Link>
+          <div className="hero-actions">
+            <Link className="hero-cta" to="/?section=explorar">
+              <Search size={19} /> Explorar o guia <ArrowRight size={16} />
+            </Link>
+            <Link className="hero-secondary" to="/categorias">
+              Ver categorias
+            </Link>
+          </div>
+
+          <div className="hero-quick">
+            <span>Atalhos:</span>
+            <Link to="/categoria/comer">Onde comer</Link>
+            <Link to="/categoria/acai-sorvetes">Açaí e sorvetes</Link>
+            <Link to="/categoria/comercio">Comércio local</Link>
+          </div>
 
           <div className="hero-note">
             <span className="note-dot" />
@@ -49,13 +72,9 @@ export function LandingPage() {
           </div>
         </div>
 
-        <div className="hero-decoration">
-          <img
-            className="hero-photo"
-            src={asset("imagens/praia-barra-grande.jpg")}
-            alt="Vista da Praia de Barra Grande, em Cajueiro da Praia"
-          />
-        </div>
+        <span className="hero-photo-tag">
+          <MapPin size={13} /> Barra Grande · Piauí
+        </span>
       </section>
 
       <section className="categories section" id="categorias">
@@ -71,36 +90,13 @@ export function LandingPage() {
         </div>
 
         <div className="category-grid">
-          {catalogCategories.map((category) => {
-            const Icon = category.icon;
-            const count = places.filter(
-              (place) => place.category === category.id,
-            ).length;
-
-            return (
-              <Link
-                className="category-card"
-                key={category.id}
-                to={`/categoria/${category.id}`}
-              >
-                <span className="category-icon">
-                  <Icon size={25} />
-                </span>
-
-                <span className="category-text">
-                  <strong>{category.name}</strong>
-                  <small>{category.shortDescription}</small>
-                </span>
-
-                <span className="category-footer">
-                  <span className="category-count">
-                    {count} {count === 1 ? "opção" : "opções"}
-                  </span>
-                  <ArrowRight size={18} className="category-arrow" />
-                </span>
-              </Link>
-            );
-          })}
+          {catalogCategories.map((category) => (
+            <CategoryCard
+              key={category.id}
+              category={category}
+              count={places.filter((place) => place.category === category.id).length}
+            />
+          ))}
         </div>
       </section>
 
@@ -118,42 +114,40 @@ export function LandingPage() {
         </div>
 
         <div className="category-grid">
-          {exploreCategories.map((category) => {
-            const Icon = category.icon;
-            const count = places.filter(
-              (place) => place.category === category.id,
-            ).length;
-
-            return (
-              <Link
-                className="category-card"
-                key={category.id}
-                to={`/categoria/${category.id}`}
-              >
-                <span className="category-icon">
-                  <Icon size={25} />
-                </span>
-
-                <span className="category-text">
-                  <strong>{category.name}</strong>
-                  <small>{category.shortDescription}</small>
-                </span>
-
-                <span className="category-footer">
-                  <span className="category-count">
-                    {count} {count === 1 ? "opção" : "opções"}
-                  </span>
-                  <ArrowRight size={18} className="category-arrow" />
-                </span>
-              </Link>
-            );
-          })}
+          {exploreCategories.map((category) => (
+            <CategoryCard
+              key={category.id}
+              category={category}
+              count={places.filter((place) => place.category === category.id).length}
+            />
+          ))}
         </div>
 
         <Link className="explore-link" to="/categorias">
           Ver todas as categorias <ArrowRight size={16} />
         </Link>
       </section>
+
+      {featuredPlaces.length > 0 && (
+        <section className="featured section" id="destaques">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">DESTAQUES DO GUIA</span>
+              <h2>Lugares que valem conhecer</h2>
+            </div>
+            <p>
+              Um primeiro olhar sobre os destinos que contam a história da
+              região.
+            </p>
+          </div>
+
+          <div className="places-grid">
+            {featuredPlaces.map((place) => (
+              <PlaceCard key={place.id} place={place} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <DonationSection />
 

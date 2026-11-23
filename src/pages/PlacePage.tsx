@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { useCatalog } from "../data/catalog";
+import { asset } from "../utils/asset";
 
 export function PlacePage() {
   const { placeId = "" } = useParams();
-  const { categoryName, getPlace } = useCatalog();
+  const { categoryName, getCategory, getPlace } = useCatalog();
   const place = getPlace(placeId);
 
   if (!place) {
@@ -20,6 +21,12 @@ export function PlacePage() {
     );
   }
 
+  const Icon = getCategory(place.category)?.icon;
+  const cover =
+    place.id === "praia-barra-grande"
+      ? asset("imagens/praia-barra-grande.jpg")
+      : null;
+
   return (
     <main className="inner-page detail-page">
       <Link className="back-link" to="/">
@@ -27,8 +34,15 @@ export function PlacePage() {
       </Link>
 
       <div className="detail-card">
-        <div className="detail-image">
-          <span>{place.kind}</span>
+        <div className={`detail-image${cover ? " has-cover" : ""}`}>
+          {cover ? (
+            <img className="detail-photo" src={cover} alt={place.name} />
+          ) : (
+            <>
+              {Icon && <Icon size={42} strokeWidth={1.6} />}
+              <span>{place.kind}</span>
+            </>
+          )}
         </div>
 
         <div className="detail-content">

@@ -2,6 +2,7 @@ import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { MobileNav } from "./components/MobileNav";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { AboutPage } from "./pages/AboutPage";
 import { CategoriesPage } from "./pages/CategoriesPage";
@@ -42,6 +43,7 @@ export default function App() {
       </Routes>
 
       <Footer />
+      <MobileNav />
     </div>
   );
 }

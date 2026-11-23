@@ -2,14 +2,27 @@ import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
 import { useCatalog } from "../data/catalog";
 import type { Place } from "../data/places";
+import { asset } from "../utils/asset";
 
 export function PlaceCard({ place }: { place: Place }) {
-  const { categoryName } = useCatalog();
+  const { categoryName, getCategory } = useCatalog();
+  const Icon = getCategory(place.category)?.icon;
+  const cover =
+    place.id === "praia-barra-grande"
+      ? asset("imagens/praia-barra-grande.jpg")
+      : null;
 
   return (
     <Link className="place-card" to={`/lugar/${place.id}`}>
-      <div className="place-image">
-        <span>{place.kind}</span>
+      <div className={`place-image${cover ? " has-cover" : ""}`}>
+        {cover ? (
+          <img className="place-photo" src={cover} alt={place.name} />
+        ) : (
+          <>
+            {Icon && <Icon size={30} strokeWidth={1.7} />}
+            <span>{place.kind}</span>
+          </>
+        )}
       </div>
 
       <div className="place-info">
